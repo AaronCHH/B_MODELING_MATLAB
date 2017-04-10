@@ -1,0 +1,34 @@
+function c_cp_compet
+global beta1 beta2 c1 c2;
+
+beta1=3.0; beta2=2.5; c1=2; c2=1;
+tend = 1.2 %.0; %the end time to run the simulation
+
+% make a set of initial conditions as a matrix
+u0vec = [100,   50,  100; 
+          80,   50,  170]; 
+     
+u0size = size(u0vec); %size of the matrix of ICs
+numICs = u0size(2); % extract number of ICs 
+
+for k = 1:numICs
+    u0 = u0vec(:, k); %extract the kth column
+[tsol, usol] = ode45(@rhs, [0, tend], u0);
+
+Xsol = usol(:, 1);
+Ysol = usol(:, 2); 
+plot(tsol, Xsol, 'b'); 
+hold on;
+plot(tsol, Ysol, 'r'); 
+end
+
+function udot = rhs(t, u)
+global beta1 beta2 c1 c2;
+
+X = u(1); Y=u(2); 
+Xdot = beta1*X - c1*X*Y;
+Ydot = beta2*Y - c2*X*Y;
+udot = [Xdot; Ydot];
+
+
+

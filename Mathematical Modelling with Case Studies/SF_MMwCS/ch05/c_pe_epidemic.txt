@@ -1,0 +1,12 @@
+> restart:with(plots):with(DEtools):
+
+> unprotect(gamma); gamma:='gamma':
+> interface(imaginaryunit=i); I:='I':
+> beta:=2.8*10^(-3): gamma:=0.44:
+> de1 := diff(S(t),t)=-beta*S(t)*I(t);
+> de2 := diff(I(t),t)=beta*S(t)*I(t)-gamma*I(t);
+> inits:=[S(0)=762,I(0)=1]:
+> myopts:=stepsize=0.1,arrows=NONE:
+> plot1:=DEplot([de1,de2],[S,I],t=0..30,[inits],scene=[t,S],linecolour=black,myopts):
+> plot2:=DEplot([de1,de2],[S,I],t=0..30,[inits],scene=[t,I],linecolour=red,myopts):
+> display(plot1,plot2);

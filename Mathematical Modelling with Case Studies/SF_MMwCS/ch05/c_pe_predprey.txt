@@ -1,0 +1,11 @@
+> restart; with(plots): with(DEtools):
+> beta[1]:=1.0: alpha[2]:=0.5: c[1]:=0.01: c[2]:=0.005:
+> de1 := diff(X(t),t) = beta[1]*X(t)-c[1]*X(t)*Y(t);
+> de2 := diff(Y(t),t) = -alpha[2]*Y(t)+c[2]*X(t)*Y(t);
+> inits := [X(0)=200, Y(0)=80];
+> myopts := stepsize=0.1, arrows=none:
+> plot1 := DEplot([de1,de2], [X,Y], t=0..20,
+     [inits],scene=[t,X],linecolor=red,myopts):
+> plot2 := DEplot([de1,de2], [X,Y], t=0..20,
+     [inits],scene=[t,Y],linecolor=blue,myopts):
+> display(plot1,plot2);
